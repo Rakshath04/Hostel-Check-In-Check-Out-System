@@ -1,0 +1,150 @@
+<!-- Search Form -->
+ <br>
+ <div>
+<form method="GET" action="{% url 'checked_in_students' %}">
+    <input type="text" name="search" value="{{ search }}" placeholder="Search by Roll Number" />
+    <button type="submit">Search</button>
+</form></div><style>
+    /* General styling for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the dashboard */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the search form */
+form {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #5c6bc0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #3f51b5;
+}
+
+/* Heading styling */
+h1 {
+    font-size: 32px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #5c6bc0;
+    color: white;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Styling for no students found message */
+p {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    form input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    form button {
+        width: 100%;
+    }
+
+    table th, table td {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+}
+
+</style>
+
+<h1>Checked-in Students</h1>
+
+<!-- Check if there are any checked-in students -->
+{% if checked_in_students %}
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Roll Number</th>
+                <th>Check-in Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in checked_in_students %}
+                <tr>
+                    <td>{{ record.student.name }}</td>
+                    <td>{{ record.student.roll_number }}</td>
+                    <td>{{ record.check_in_time }}</td>
+                    <td>
+                        <a href="{% url 'check_out' record.student.id %}">Check Out</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No checked-in students found.</p>
+{% endif %}

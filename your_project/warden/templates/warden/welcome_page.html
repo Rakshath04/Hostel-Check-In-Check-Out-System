@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 36px;
+        }
+
+        /* Navigation Bar Styling */
+        .nav-header {
+            background-color: #444;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        nav ul li a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+
+        /* Slideshow Styling */
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            margin: auto;
+        }
+
+        .mySlides {
+            display: none;
+            width: 100%;
+            height: auto;
+        }
+
+        .image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Hostel Check-In And Check-Out System</h1>
+    </header>
+
+    <!-- Navigation -->
+    <header class="nav-header">
+        <nav>
+            <ul>
+                <li><a href="signup">Signup</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section>
+    <!-- Slideshow Section -->
+    <div class="slideshow-container">
+        <!-- Slide 1 -->
+        <div class="mySlides fade">
+            <img src="{% static 'img/hos4.png' %}" alt="Hostel Image 1" class="image">
+        </div>
+        <!-- Slide 2 -->
+        <div class="mySlides fade">
+            <img src="{% static 'img/hostelimage.jpg' %}" alt="Hostel Image 1" class="image">
+        </div>
+        <!-- Slide 3 -->
+        <div class="mySlides fade">
+            <img src="{% static 'img/hos1.avif' %}" alt="Hostel Image 2" class="image">
+        </div>
+        <!-- Slide 4 -->
+        <div class="mySlides fade">
+            <img src="{% static 'img/hos2.jpg' %}" alt="Hostel Image 3" class="image">
+        </div>
+        <!-- Slide 4 -->
+        <div class="mySlides fade">
+            <img src="{% static 'img/hos3.jpg' %}" alt="Hostel Image 3" class="image">
+        </div>
+    </div>
+</section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Your Website | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+
+        showSlides();  // Initialize the slideshow
+    </script>
+</body>
+</html>

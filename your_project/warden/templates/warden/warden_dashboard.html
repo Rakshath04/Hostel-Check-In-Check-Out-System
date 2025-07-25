@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warden Dashboard</title>
+
+    <style>
+        /* Set background image with a random hostel picture */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://source.unsplash.com/1600x900/?hostel'); /* Random hostel image */
+            background-size: cover;
+            background-position: center;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for better contrast */
+            padding: 20px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Header styling */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        header .logout-btn {
+            background-color: #FF6347; /* Tomato */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        header .logout-btn:hover {
+            background-color: #FF4500; /* OrangeRed */
+            transform: translateY(-3px);
+        }
+
+        header .logout-btn:active {
+            background-color: #FF6347;
+            transform: translateY(0);
+        }
+
+        /* Main container with content */
+        .content-container {
+            text-align: center;
+            color: #fff;
+            background-image: url("{% static 'img/hostelimage.jpg' %}");
+            background-color: rgba(0, 0, 0, 0.6); /* Dark background for content */
+            padding: 40px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 900px;
+            margin-top: 60px; /* Account for the fixed header */
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Styling for the button container */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Styling for each button with light, soft colors */
+        .button-container a {
+            padding: 18px 40px;
+            background-color: #FFD700; /* Light Goldenrod Yellow */
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hover effect for buttons */
+        .button-container a:hover {
+            background-color: #FFB6C1; /* Light Pink */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Active state for buttons */
+        .button-container a:active {
+            background-color: #98FB98; /* Pale Green */
+            transform: translateY(0);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 20px;
+                width: 90%;
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            .button-container a {
+                font-size: 1rem;
+                padding: 15px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with logout button -->
+    <header>
+        <a href="{% url 'welcome_page' %}" class="logout-btn">Logout</a>
+    </header>
+
+    <div class="content-container">
+        <h2>Welcome to the Warden Dashboard</h2>
+        <div class="button-container">
+            <!-- Buttons with links to the respective pages -->
+            <a href="{% url 'register_student' %}">Register Students</a>
+            <a href="{% url 'dashboard' %}">Check-In</a>
+            <a href="{% url 'studashboard' %}">Student Dashboard</a>
+            <a href="{% url 'checked_in_students' %}">Checked-In Students</a>
+            <a href="{% url 'report' %}">Report</a>
+        </div>
+    </div>
+</body>
+</html>

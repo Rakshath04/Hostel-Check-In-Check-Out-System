@@ -1,0 +1,167 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'warden/style.css' %}">
+    <style>
+     /* General styling for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the dashboard */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the search form */
+form {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #5c6bc0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #3f51b5;
+}
+
+/* Heading styling */
+h1 {
+    font-size: 32px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #5c6bc0;
+    color: white;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Styling for no students found message */
+p {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    form input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    form button {
+        width: 100%;
+    }
+
+    table th, table td {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    
+    <h2>Student Check-In Dashboard</h2>
+    
+   <form method="GET" action="{% url 'dashboard' %}">
+    <input type="text" name="search" placeholder="Search by roll number..." value="{{ search_query }}">
+    <button type="submit">Search</button>
+</form>
+    <center>
+    <h3>Student Check-in</h3>
+</center>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Roll Number</th>
+                <th>Date of Birth</th>
+                <th>Check-in Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in student_status %}
+            <tr>
+                <td>{{ entry.student.1 }}</td> <!-- Name -->
+                <td>{{ entry.student.2 }}</td> <!-- Roll Number -->
+                <td>{{ entry.student.3 }}</td> <!-- Date of Birth -->
+                <td>{{ entry.check_in_time }}</td> <!-- Check-in Time -->
+                
+                <td>
+                    {% if entry.check_in_time %}
+                        <button disabled>Checked in</button>
+                    {% else %}
+                        <a href="{% url 'check_in' entry.student.0 %}">Check In</a>
+                        
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
